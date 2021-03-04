@@ -7,9 +7,8 @@ import com.evertec.everteplacetopay.data.repository.Repository
 class LoginViewModel @ViewModelInject constructor(private val repository: Repository) :
     ViewModel() {
 
-
-    fun printText() {
-
+    fun printText(): String {
+        return repository.printText()
     }
 
 }

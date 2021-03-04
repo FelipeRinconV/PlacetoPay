@@ -16,4 +16,8 @@ interface Repository {
     suspend fun getStateTransaction(gateWayQuery: GateWayQuery): Resource<InfoTransaction>
 
     suspend fun insertTransaction(transaction: TransactionEntity)
+
+    fun printText(): String {
+        return "hello"
+    }
 }
