@@ -1,4 +1,4 @@
-package com.evertec.evertec_test.di.module
+package com.evertec.everteplacetopay.di.module
 
 import android.content.Context
 import com.evertec.everteplacetopay.data.local.AppDatabase
@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +27,7 @@ class DataModule {
     @Provides
     @Singleton
     //TODO buscar como se puede injectar el modulo
-    fun dataBaseProvider(context: Context): AppDatabase {
+    fun dataBaseProvider(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getDatabase(context)
     }
 

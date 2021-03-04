@@ -9,43 +9,42 @@ import kotlinx.android.parcel.Parcelize
 
 data class Additional(
 
-    @SerializedName("credit") val credit: Credit,
-    @SerializedName("totalAmount") val totalAmount: Double,
-    @SerializedName("interestAmount") val interestAmount: Double,
-    @SerializedName("installmentAmount") val installmentAmount: Int,
-    @SerializedName("iceAmount") val iceAmount: Int
+    val credit: Credit,
+    val totalAmount: Double,
+    val interestAmount: Double,
+    val installmentAmount: Int,
+    val iceAmount: Int
 )
 
 data class AmountInput(
 
-    @SerializedName("currency") val currency: String,
-    @SerializedName("total") val total: Double
+    val currency: String,
+    val total: Double
 )
 
 data class Conversion(
 
-    @SerializedName("from") val from: From,
-    @SerializedName("to") val to: To,
-    @SerializedName("factor") val factor: Double
+    val from: From,
+    val to: To,
+    val factor: Double
 )
 
 data class From(
 
-    @SerializedName("currency") val currency: String,
-    @SerializedName("total") val total: Double
+    val currency: String,
+    val total: Double
 )
 
 data class Status(
 
-    @SerializedName("status") val status: String,
-    @SerializedName("reason") val reason: Int,
-    @SerializedName("message") val message: String,
-    @SerializedName("date") val date: String
+    val status: String,
+    val reason: Int,
+    val message: String,
+    val date: String
 )
 
 
 data class To(
-
-    @SerializedName("currency") val currency: String,
-    @SerializedName("total") val total: Double
+    val currency: String,
+    val total: Double
 )

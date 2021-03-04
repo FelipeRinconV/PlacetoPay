@@ -20,7 +20,7 @@ import kotlinx.parcelize.RawValue
  */
 
 data class Transaction(
-    var status: Status,
+    val status: Status,
     val internalReference: Int,
     val reference: String,
     val paymentMethod: String,
@@ -83,6 +83,4 @@ data class TransactionEntity(
     val state: String = "",
     @ColumnInfo(name = "value")
     val value: Double,
-    @ColumnInfo(name = "date")
-    val date: Date
 )
