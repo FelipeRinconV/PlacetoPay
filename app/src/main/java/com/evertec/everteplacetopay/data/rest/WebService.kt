@@ -1,9 +1,9 @@
-package com.evertec.evertec_test.data.rest
+package com.evertec.everteplacetopay.data.rest
 
-import PostJsonTransaction
 import com.evertec.everteplacetopay.data.model.InfoTransaction
 import com.evertec.everteplacetopay.data.model.Transaction
-import com.evertec.evertec_test.vo.json.output.GateWayQuery
+import com.evertec.everteplacetopay.vo.json.output.GateWayQuery
+import com.evertec.everteplacetopay.vo.json.output.PostJsonTransaction
 import retrofit2.http.POST
 
 

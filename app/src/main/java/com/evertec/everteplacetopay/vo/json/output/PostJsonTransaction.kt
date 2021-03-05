@@ -1,19 +1,21 @@
-import com.google.gson.annotations.SerializedName
+package com.evertec.everteplacetopay.vo.json.output
+
+import com.evertec.everteplacetopay.vo.json.input.AmountInput
 
 
 /**
- * Conjunto de data class para enviar la informacion necesaria para generar el pago
+ * Conjunto de data data class para enviar la informacion necesaria para generar el pago
  */
 data class PostJsonTransaction(
 
-    val auth: Auth,
+   // val auth: Auth,
     val locale: String,
-    val payment: Payment,
+    //  val payment: Payment,
     val ipAddress: String,
     val userAgent: String,
-    val instrument: Instrument,
-    val payer: Payer,
-    val buyer: Buyer
+    //   val instrument: Instrument,
+    //  val payer: Payer,
+    //  val buyer: Buyer
 )
 
 data class Auth(
@@ -74,18 +76,18 @@ data class Instrument(
 
 data class Payer(
 
-     val document: Int,
+    val document: Int,
     val documentType: String,
-     val name: String,
-     val surname: String,
+    val name: String,
+    val surname: String,
     val email: String,
-   val mobile: Int
+    val mobile: Int
 )
 
 data class Payment(
 
     val reference: String,
-     val description: String,
+    val description: String,
     val amountInput: AmountInput
 )
 

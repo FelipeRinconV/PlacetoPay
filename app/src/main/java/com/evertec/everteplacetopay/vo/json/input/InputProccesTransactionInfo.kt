@@ -1,6 +1,8 @@
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+
+package com.evertec.everteplacetopay.vo.json.input
+
+import com.evertec.everteplacetopay.vo.json.output.Credit
+
 
 /**
  * Archivo que contiene los data class para recibir la informacion de la api proccesTransatin

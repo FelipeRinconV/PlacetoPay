@@ -1,17 +1,17 @@
 package com.evertec.everteplacetopay.di.module
 
+import com.evertec.everteplacetopay.data.repository.RepoImplementation
 import com.evertec.everteplacetopay.data.repository.Repository
-import com.evertec.everteplacetopay.ui.login.viewmodel.LoginViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 
+
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class LoginActivityModule {
+abstract class ActivityRetainedModule {
 
-    @Provides
-    fun loginViewModelProvider(repository: Repository)= LoginViewModel(repository)
-
+    @Binds
+    abstract fun dataSourceProvider(impl: RepoImplementation): Repository
 }

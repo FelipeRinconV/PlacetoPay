@@ -1,13 +1,16 @@
 package com.evertec.everteplacetopay.data.repository
 
-import PostJsonTransaction
 import com.evertec.everteplacetopay.data.model.InfoTransaction
 import com.evertec.everteplacetopay.data.model.Transaction
 import com.evertec.everteplacetopay.data.model.TransactionEntity
-import com.evertec.evertec_test.vo.Resource
-import com.evertec.evertec_test.vo.json.output.GateWayQuery
+import com.evertec.everteplacetopay.vo.Resource
+import com.evertec.everteplacetopay.vo.json.output.GateWayQuery
+import com.evertec.everteplacetopay.vo.json.output.PostJsonTransaction
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import javax.inject.Inject
 
-class RepoImplementation  (private val dataSource: DataSource) : Repository {
+@ActivityRetainedScoped
+class RepoImplementation @Inject constructor(private val dataSource: DataSource) : Repository {
 
     override suspend fun postGenerateTransaction(jsonTransaction: PostJsonTransaction): Resource<Transaction> {
         return dataSource.postGenerateTransaction(jsonTransaction)

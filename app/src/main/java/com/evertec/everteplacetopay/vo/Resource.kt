@@ -1,4 +1,4 @@
-package com.evertec.evertec_test.vo
+package com.evertec.everteplacetopay.vo
 
 import java.lang.Exception
 

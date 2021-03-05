@@ -1,6 +1,5 @@
 package com.evertec.everteplacetopay.data.rest
 
-import com.evertec.evertec_test.data.rest.WebService
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

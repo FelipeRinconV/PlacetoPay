@@ -1,10 +1,5 @@
 package com.evertec.everteplacetopay.data.model
 
-import Additional
-import Amount
-import AmountInput
-import Conversion
-import Status
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -20,15 +15,15 @@ import kotlinx.parcelize.RawValue
  */
 
 data class Transaction(
-    val status: Status,
+    //val status: Status,
     val internalReference: Int,
     val reference: String,
     val paymentMethod: String,
     val franchise: String,
     val franchiseName: String,
     val issuerName: String,
-    val amountInput: AmountInput,
-    val conversion: Conversion,
+    //val amountInput: AmountInput,
+    //val conversion: Conversion,
     val authorization: Int,
     val receipt: Int,
     val type: String,
@@ -36,8 +31,8 @@ data class Transaction(
     val lastDigits: Int,
     val provider: String,
     val discount: String,
-    val processorFields: List<String>,
-    val additional: Additional
+    //val processorFields: List<String>,
+    //  val additional: Additional
 )
 
 
@@ -46,15 +41,15 @@ data class Transaction(
  */
 data class InfoTransaction(
 
-    val status: Status,
+    //val status: Status,
     val internalReference: Int,
     val reference: String,
     val paymentMethod: String,
     val franchise: String,
     val franchiseName: String,
     val issuerName: String,
-    val amount: Amount,
-    val conversion: Conversion,
+    // val amount: Amount,
+    // val conversion: Conversion,
     val authorization: Int,
     val receipt: Int,
     val type: String,
@@ -62,8 +57,8 @@ data class InfoTransaction(
     val lastDigits: Int,
     val provider: String,
     val discount: String,
-    val processorFields: List<String>,
-    val additional: Additional
+    // val processorFields: List<String>,
+    // val additional: Additional
 )
 
 
