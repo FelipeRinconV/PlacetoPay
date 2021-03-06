@@ -25,6 +25,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/label"
@@ -36,7 +37,45 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_nombre_paga"
+                    android:id="@+id/txt_name_payer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/surname"
+                app:layout_constraintBottom_toTopOf="@+id/textField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.94"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_surname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/document"
+                app:layout_constraintBottom_toTopOf="@+id/textField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.94"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_num_document"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -55,7 +94,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_correo"
+                    android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -74,7 +113,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_num_celular"
+                    android:id="@+id/txt_num_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -93,7 +132,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_numero_tarjeta"
+                    android:id="@+id/txt_num_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -120,7 +159,7 @@
                     tools:ignore="MissingConstraints">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_fecha_vencimiento_mes"
+                        android:id="@+id/txt_expired_month"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -141,7 +180,7 @@
                     tools:ignore="MissingConstraints">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_fecha_vencimiento_anio"
+                        android:id="@+id/txt_expired_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -163,7 +202,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_codigo_seguridad"
+                    android:id="@+id/txt_cvv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -182,7 +221,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_refrencia"
+                    android:id="@+id/txt_reference"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -201,7 +240,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_descripcion"
+                    android:id="@+id/txt_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -221,7 +260,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_valor_a_pagar"
+                    android:id="@+id/txt_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

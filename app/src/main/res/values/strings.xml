@@ -8,9 +8,11 @@
     <string name="numero_celular">Numero celular</string>
     <string name="numero_tarjeta">Numero tarjeta</string>
     <string name="mes">Mes</string>
-    <string name="cvv">Cvc</string>
+    <string name="cvv">Cvv</string>
     <string name="Año">Año</string>
     <string name="reference">Referencia</string>
     <string name="description">Descripcion</string>
     <string name="value">Valor a pagar</string>
+    <string name="surname">Apellido</string>
+    <string name="document">Numero de documento</string>
 </resources>

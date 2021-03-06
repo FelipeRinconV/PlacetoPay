@@ -1,20 +1,16 @@
 package com.evertec.everteplacetopay.data.repository
 
-import androidx.lifecycle.MutableLiveData
-import com.evertec.everteplacetopay.data.model.InfoTransaction
-import com.evertec.everteplacetopay.data.model.Transaction
-import com.evertec.everteplacetopay.data.model.TransactionEntity
+import com.evertec.everteplacetopay.data.model.*
 import com.evertec.everteplacetopay.vo.Resource
-import com.evertec.everteplacetopay.vo.json.output.GateWayQuery
-import com.evertec.everteplacetopay.vo.json.output.PostJsonTransaction
 
 interface Repository {
 
-    suspend fun postGenerateTransaction(jsonTransaction: PostJsonTransaction): Resource<Transaction>
+
+    suspend fun postGenerateTransaction(jsonTransaction: String): Resource<ProcessTransactionInput>
 
     suspend fun getAllTransaction(): Resource<List<TransactionEntity>>
 
-    suspend fun getStateTransaction(gateWayQuery: GateWayQuery): Resource<InfoTransaction>
+    suspend fun getStateTransaction(jsonGateWayQuery: String): Resource<GatewayQueryInput>
 
     suspend fun insertTransaction(transaction: TransactionEntity)
 

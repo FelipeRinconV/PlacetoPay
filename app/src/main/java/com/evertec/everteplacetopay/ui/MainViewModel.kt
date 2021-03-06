@@ -1,26 +1,34 @@
 package com.evertec.everteplacetopay.ui
 
+import android.content.Context
+import android.net.wifi.WifiManager
 import android.os.Build
+import android.text.format.Formatter.formatIpAddress
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.evertec.everteplacetopay.data.model.Transaction
 import com.evertec.everteplacetopay.data.model.TransactionEntity
 import com.evertec.everteplacetopay.data.repository.Repository
 import com.evertec.everteplacetopay.vo.Resource
-import com.evertec.everteplacetopay.vo.json.output.*
+import com.evertec.everteplacetopay.vo.json.processTransaction.output.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import com.evertec.everteplacetopay.*
+import com.evertec.everteplacetopay.data.model.ProcessTransactionInput
+import com.evertec.everteplacetopay.data.model.ProcessTransactionOutput
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
+import java.util.*
 
 class MainViewModel @ViewModelInject constructor(private val repository: Repository) : ViewModel() {
 
-    private val posJsonTransaction = MutableLiveData<PostJsonTransaction>()
 
+    private val posJsonTransaction = MutableLiveData<String>()
+
+    //Result of the transaction
     val currentTransaction = posJsonTransaction.switchMap {
-        liveData<Resource<Transaction>>(Dispatchers.IO) {
+        liveData<Resource<ProcessTransactionInput>>(Dispatchers.IO) {
             emit(Resource.Loading())
             try {
                 emit(repository.postGenerateTransaction(it))
@@ -36,40 +44,62 @@ class MainViewModel @ViewModelInject constructor(private val repository: Reposit
     }
 
 
+    /**
+     * Method that generates json for gateway transaction
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun getNewPosJsonTransaction(
-
-    ): String {
-
+        name: String,
+        surName: String,
+        numDocument: String,
+        email: String,
+        numPhone: String,
+        numCard: String,
+        monthExpired: String,
+        yearExpired: String,
+        ccv: String,
+        currency: String,
+        total: String,
+        description: String,
+        reference: String,
+        context: Context
+    ) {
 
         val login = "6dd490faf9cb87a9862245da41170ff2"
         val passwordKey = "024h1IlD"
-        //val nonce = getNonce(false)
         val nonce = getNonce()
         val nonceBase64 = getNonceBase64(nonce)
-        // val nonceBase64 = base64(nonce.encodeToByteArray())
         val seedMethod = getSeed()
-        // val seedMethod = "2021-03-06T09:56:56-05:00"
-
         val trankey = getDigits(false, passwordKey, nonce, seedMethod)
         val auth = Auth(login, trankey, nonceBase64, seedMethod)
 
-        var gson = Gson()
-        val jsonString = gson.toJson(auth)
+        val card = Card(ccv, monthExpired, yearExpired, "36545400000008")
+        val instrument = Instrument(card)
 
-        return jsonString;
+        val ipAddress = getLocalIpAddress(context).toString()
+        //Todo extraer locale
+        val locale = "es_EC"
 
-        //  val credit = Credit(ccv.toInt(), 0, "ap", 20)
-        /*
- val card = Card(numCard.toInt(), monthExpired.toInt(), yearExpired.toInt(), ccv.toInt())
- val instrument = Instrument(card, credit, "otp")
- val auth = Auth("login", "transkey", "nonce", "seed")
- val amountInput = AmountInput("cop", 200.0)
- val payment = Payment("REFRENCE", "description", amountInput)
- // val payer = Payer()
- val postJsonTransaction = PostJsonTransaction(auth, "cop", payment, "", "", instrument)
- */
+        //TODO pedir el tipo de documento
+        val payer = Payer(numDocument, "CC", email, numPhone, name, surName)
+        val amount = Amount(currency, 2000.000)
+        val payment = Payment(amount, description, reference)
 
+        val userAgent = "kotlin " + System.getProperties().getProperty("kotlin.version")
+
+
+        val stringJson = Gson().toJson(
+            ProcessTransactionOutput(
+                auth,
+                instrument,
+                ipAddress,
+                locale,
+                payer,
+                payment,
+                userAgent
+            )
+        )
+        posJsonTransaction.value = stringJson
 
     }
 
