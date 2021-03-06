@@ -2,4 +2,15 @@
     <string name="app_name">EvertePlacetoPay</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label">Name</string>
+    <string name="password">Pasword</string>
+    <string name="correo">Correo</string>
+    <string name="numero_celular">Numero celular</string>
+    <string name="numero_tarjeta">Numero tarjeta</string>
+    <string name="mes">Mes</string>
+    <string name="cvv">Cvc</string>
+    <string name="Año">Año</string>
+    <string name="reference">Referencia</string>
+    <string name="description">Descripcion</string>
+    <string name="value">Valor a pagar</string>
 </resources>

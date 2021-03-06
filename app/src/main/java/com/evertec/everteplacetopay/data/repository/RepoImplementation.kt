@@ -1,5 +1,6 @@
 package com.evertec.everteplacetopay.data.repository
 
+import androidx.lifecycle.MutableLiveData
 import com.evertec.everteplacetopay.data.model.InfoTransaction
 import com.evertec.everteplacetopay.data.model.Transaction
 import com.evertec.everteplacetopay.data.model.TransactionEntity
@@ -12,7 +13,7 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class RepoImplementation @Inject constructor(private val dataSource: DataSource) : Repository {
 
-    override suspend fun postGenerateTransaction(jsonTransaction: PostJsonTransaction): Resource<Transaction> {
+    override suspend fun postGenerateTransaction(jsonTransaction:PostJsonTransaction): Resource<Transaction> {
         return dataSource.postGenerateTransaction(jsonTransaction)
     }
 
