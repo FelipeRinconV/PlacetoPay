@@ -1,6 +1,6 @@
 package com.evertec.everteplacetopay.data.model
 
-import com.evertec.everteplacetopay.vo.json.processTransaction.output.Auth
+import com.evertec.everteplacetopay.vo.json.output.Auth
 import com.evertec.everteplacetopay.vo.json.processTransaction.output.Instrument
 import com.evertec.everteplacetopay.vo.json.processTransaction.output.Payer
 import com.evertec.everteplacetopay.vo.json.processTransaction.output.Payment

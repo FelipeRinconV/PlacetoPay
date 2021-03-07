@@ -1,12 +1,11 @@
 package com.evertec.everteplacetopay.data.model
 
-import com.evertec.everteplacetopay.vo.json.input.Conversion
-import com.evertec.everteplacetopay.vo.json.processTransaction.input.*
+import com.evertec.everteplacetopay.vo.json.input.*
 
 /**
- * Respuesta recibida al consulta la api https://dev.placetopay.com/rest/gateway/process
+ * Respuesta json recibida de https://dev.placetopay.com/rest/gateway/query
  */
-data class ProcessTransactionInput(
+data class GatewayQueryInput(
     val additional: Additional,
     val amount: Amount,
     val authorization: String,
