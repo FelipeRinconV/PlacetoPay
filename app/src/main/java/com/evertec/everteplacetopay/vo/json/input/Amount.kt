@@ -10,5 +10,5 @@ data class Amount(
     val currency: String,
     val details: @RawValue List<Detail>,
     //val taxes: @RawValue List<Taxe>,
-    val total: Int
+    val total: Double
 ) : Parcelable

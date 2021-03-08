@@ -145,7 +145,7 @@ fun getState(state: String): String {
 
     return when (state) {
 
-        "APROVED" -> "APROVADA"
+        "APPROVED" -> "APROVADA"
 
         "REJECTED" -> "RECHAZADA"
 

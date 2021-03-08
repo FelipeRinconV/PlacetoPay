@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class From(
     val currency: String,
-    val total: Int
+    val total: Double
 ) : Parcelable

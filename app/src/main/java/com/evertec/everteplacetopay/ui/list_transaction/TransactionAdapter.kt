@@ -66,6 +66,7 @@ class TransactionAdapter(
             txtDate.text = item.date.subSequence(0, 10)
             txtInternalReference.text = item.internalReference.toString()
             txtValue.text = item.value.toString()
+            txtReference.text = item.reference
 
             if (txtState.text.equals("PENDIENTE")) {
                 btnUpdateTransaction.visibility = View.VISIBLE

@@ -2,6 +2,7 @@ package com.evertec.everteplacetopay.ui.generate_transaction
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +20,11 @@ import com.evertec.everteplacetopay.data.DataController
 import com.evertec.everteplacetopay.data.model.TransactionEntity
 import com.evertec.everteplacetopay.databinding.FragmentGenerateTransactionBinding
 import com.evertec.everteplacetopay.showToast
+import com.evertec.everteplacetopay.singUpUser
 import com.evertec.everteplacetopay.ui.MainViewModel
 import com.evertec.everteplacetopay.ui.login.viewmodel.LoginViewModel
 import com.evertec.everteplacetopay.vo.Resource
+import com.example.awesomedialog.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,22 +52,56 @@ class GenerateTransactionFragment : Fragment() {
     private fun setupUi() {
         //Event to generates pay
         binding.btnIrResume.setOnClickListener {
-            viewModel.getNewPosJsonTransaction(
-                binding.txtNamePayer.text.toString(),
-                binding.txtSurname.text.toString(),
-                binding.txtNumDocument.text.toString(),
-                binding.txtEmail.text.toString(),
-                binding.txtNumPhone.text.toString(),
-                binding.txtNumCard.text.toString(),
-                binding.txtExpiredMonth.text.toString(),
-                binding.txtExpiredYear.text.toString(),
-                binding.txtCvv.text.toString(),
-                "COP",
-                binding.txtAmount.text.toString(),
-                binding.txtDescription.text.toString(),
-                binding.txtReference.text.toString(),
-                requireContext()
-            )
+
+
+            if (binding.txtNamePayer.text.toString().isEmpty() ||
+                binding.txtSurname.text.toString().isBlank() ||
+                binding.txtNumDocument.text.toString().isBlank() ||
+                binding.txtEmail.text.toString().isBlank() ||
+                binding.txtNumPhone.text.toString().isBlank() ||
+                binding.txtNumCard.text.toString().isBlank() ||
+                binding.txtExpiredMonth.text.toString().isBlank() ||
+                binding.txtExpiredYear.text.toString().isBlank() ||
+                binding.txtCvv.text.toString().isBlank()
+            ) {
+                AwesomeDialog.build(requireActivity())
+                    .title(getString(R.string.error))
+                    .body(getString(R.string.enter_fields))
+                    .onPositive(getString(R.string.aceptar)) {
+
+                    }
+
+            } else {
+
+                AwesomeDialog.build(requireActivity())
+                    .title(getString(R.string.alerta))
+                    .body(getString(R.string.confirma_generated_transaction))
+                    .onPositive(getString(R.string.confirm)) {
+                        viewModel.getNewPosJsonTransaction(
+                            binding.txtNamePayer.text.toString(),
+                            binding.txtSurname.text.toString(),
+                            binding.txtNumDocument.text.toString(),
+                            binding.txtEmail.text.toString(),
+                            binding.txtNumPhone.text.toString(),
+                            binding.txtNumCard.text.toString(),
+                            binding.txtExpiredMonth.text.toString(),
+                            binding.txtExpiredYear.text.toString(),
+                            binding.txtCvv.text.toString(),
+                            //TODO se debe de poner un sppiner para tipo de documento  y tipo de moneda
+                            "COP",
+                            binding.txtAmount.text.toString(),
+                            binding.txtDescription.text.toString(),
+                            binding.txtReference.text.toString(),
+                            requireContext()
+                        )
+                    }
+                    .onNegative(getString(R.string.cancelar)) {
+
+                    }
+
+            }
+
+
         }
 
 
@@ -88,7 +125,7 @@ class GenerateTransactionFragment : Fragment() {
                         it.data.reference,
                         it.data.lastDigits,
                         it.data.status.status,
-                        it.data.amount.total.toDouble(),
+                        it.data.amount.total,
                         it.data.status.date
                     )
 
@@ -103,12 +140,22 @@ class GenerateTransactionFragment : Fragment() {
                         showToast("La transsaccion generada es nula", Toast.LENGTH_LONG)
                     }
 
-
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
-                    //binding.json.text = it.exception.message.toString()
-                    showToast("${it.exception.message.toString()}", Toast.LENGTH_LONG)
+                    Log.e("ERROR_CREAR", it.exception.message.toString())
+
+                    /*
+                    if (it != null) {
+                        AwesomeDialog.build(requireActivity())
+                            .title(getString(R.string.error))
+                            .body(getString(R.string.ocurrio_un_error_generando))
+                            .onPositive(getString(R.string.aceptar)) {
+
+                            }
+                    }
+                     */
+
                 }
             }
 

@@ -34,7 +34,7 @@ class ResumeTransaction : Fragment() {
 
     private fun setupUi() {
 
-        binding.txtDate.text = transaction.date
+        binding.txtDate.text = transaction.date.subSequence(0, 10)
         binding.txtStatus.text = getState(transaction.status.status)
         binding.txtAmountOriginal.text = transaction.amount.total.toString()
         binding.txtInterests.text = "0"

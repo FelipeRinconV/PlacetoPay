@@ -6,7 +6,7 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class Conversion(
-    val factor: Int,
+    val factor: Double,
     val from: @RawValue From,
-    val to:@RawValue To
+    val to: @RawValue To
 ) : Parcelable

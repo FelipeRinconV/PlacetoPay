@@ -41,7 +41,13 @@
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
     <string name="generar_pago">Generar pago</string>
-    <string name="updated_transaction">Confirma actualizar la transaccion</string>
-    <string name="delete_transaction">Confirma borrar la transaccion</string>
+    <string name="updated_transaction">Transaccion actualizada</string>
+    <string name="delete_transaction">¿Confirma borrar la transaccion?</string>
     <string name="confirm">Confirmar</string>
+    <string name="ocurrio_un_error_generando">Ocurrio un error en la generacion del pago, por favor valide la informacion ingresasa.</string>
+    <string name="confirma_generated_transaction">¿Confirma generar la transaccion con los dato ingresados?</string>
+    <string name="transaction_udate">La transaccion fue actualizada</string>
+    <string name="information">Informacion</string>
+    <string name="error_actualizando">Ocurrio un error actualizando la transaccion</string>
+    <string name="enter_fields">Por favor ingrese todos los campos</string>
 </resources>

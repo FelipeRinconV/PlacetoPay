@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Detail(
-    val amount: Int,
+    val amount: Double,
     val kind: String
 ) : Parcelable

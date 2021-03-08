@@ -37,7 +37,6 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
     private var _binding: FragmentListTransactionBinding? = null
     private lateinit var transactionsAdapter: TransactionAdapter
 
-
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -165,17 +164,25 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
                         Observer {
                             when (it) {
                                 is Resource.Loading -> {
-                                    showToast("Actualizando item", Toast.LENGTH_LONG)
+                                    binding.progressBar3.visibility = View.VISIBLE
                                 }
                                 is Resource.Success -> {
+                                    binding.progressBar3.visibility = View.GONE
                                     viewModel.updateTransaction(it.data, transactionEntity)
-                                    showToast("Item actualizado", Toast.LENGTH_LONG)
+                                    AwesomeDialog.build(requireActivity())
+                                        .title(getString(R.string.information))
+                                        .body(getString(R.string.updated_transaction))
+                                        .onPositive(getString(R.string.aceptar)) {
+                                        }
                                 }
                                 is Resource.Failure -> {
-                                    showToast(
-                                        "Error actualizando item${it.exception.message}",
-                                        Toast.LENGTH_LONG
-                                    )
+                                    binding.progressBar3.visibility = View.GONE
+                                    AwesomeDialog.build(requireActivity())
+                                        .title(getString(R.string.error))
+                                        .body(getString(R.string.error_actualizando))
+                                        .onPositive(getString(R.string.aceptar)) {
+                                        }
+
                                 }
                             }
                         })

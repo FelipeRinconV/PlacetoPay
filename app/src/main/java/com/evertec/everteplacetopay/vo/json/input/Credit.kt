@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Credit(
     val code: Int,
     val groupCode: String,
-    val installments: Int,
+    val installments: Double,
     val type: String
 ) : Parcelable

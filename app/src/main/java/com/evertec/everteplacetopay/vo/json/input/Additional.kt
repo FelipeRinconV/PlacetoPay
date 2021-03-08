@@ -11,10 +11,10 @@ data class Additional(
     val credit: @RawValue Credit,
     val expiration: String,
     val iceAmount: Double,
-    val installmentAmount: Int,
-    val interestAmount: Int,
+    val installmentAmount: Double,
+    val interestAmount: Double,
     val line: @RawValue Any,
     val merchantCode: String,
     val terminalNumber: String,
-    val totalAmount: Int
+    val totalAmount: Double
 ) : Parcelable
