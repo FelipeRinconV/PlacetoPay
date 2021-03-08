@@ -52,52 +52,79 @@ class LoginFragment : Fragment() {
                 val name: String = nameLayout.text.toString()
                 val password: String = passwordLayout.text.toString()
 
-                viewModel.getUser(name, password)
-                    .observe(viewLifecycleOwner, Observer {
-                        when (it) {
-                            is Resource.Loading -> {
-                                binding.progressBar2.visibility = View.VISIBLE
-                            }
-                            is Resource.Success -> {
-                                binding.progressBar2.visibility = View.GONE
-                                val userEntityInput = it.data
+                if (name.isEmpty() || password.isEmpty()) {
+                    AwesomeDialog.build(requireActivity())
+                        .title(getString(R.string.error))
+                        .body(getString(R.string.enter_fields))
+                        .onPositive(getString(R.string.aceptar)) {
 
-                                if (userEntityInput != null) {
-                                    DataController.setData(userEntityInput)
-                                    saveUserSfp(requireActivity(), userEntityInput)
-                                    findNavController().navigate(R.id.listTransactionFragment)
-                                } else {
+                        }
+
+
+                } else {
+
+                    viewModel.getUser(name, password)
+                        .observe(viewLifecycleOwner, Observer {
+                            when (it) {
+                                is Resource.Loading -> {
+                                    binding.progressBar2.visibility = View.VISIBLE
+                                }
+                                is Resource.Success -> {
+                                    binding.progressBar2.visibility = View.GONE
+                                    val userEntityInput = it.data
+
+                                    if (userEntityInput != null) {
+                                        DataController.setData(userEntityInput)
+                                        saveUserSfp(requireActivity(), userEntityInput)
+                                        findNavController().navigate(R.id.listTransactionFragment)
+                                    } else {
+                                        AwesomeDialog.build(requireActivity())
+                                            .title(getString(R.string.nuevo_usuario))
+                                            .body(getString(R.string.por_favor_registrese_primer))
+                                            .onPositive(getString(R.string.Close)) {
+                                            }
+                                    }
+                                }
+                                is Resource.Failure -> {
+                                    binding.progressBar2.visibility = View.GONE
                                     AwesomeDialog.build(requireActivity())
-                                        .title(getString(R.string.nuevo_usuario))
-                                        .body(getString(R.string.por_favor_registrese_primer))
-                                        .onPositive(getString(R.string.Close)) {
+                                        .title(getString(R.string.error))
+                                        .body(getString(R.string.ocurrio_un_error_login))
+                                        .onPositive(getString(R.string.aceptar)) {
                                         }
                                 }
                             }
-                            is Resource.Failure -> {
-                                binding.progressBar2.visibility = View.GONE
-                                AwesomeDialog.build(requireActivity())
-                                    .title(getString(R.string.error))
-                                    .body(getString(R.string.ocurrio_un_error_login))
-                                    .onPositive(getString(R.string.aceptar)) {
-                                    }
-                            }
-                        }
-                    })
+                        })
+
+                }
+
             }
 
             binding.btnRegister.setOnClickListener {
 
                 val name: String = nameLayout.text.toString()
                 val password: String = passwordLayout.text.toString()
-                viewModel.saveUser(name, password)
 
-                AwesomeDialog.build(requireActivity())
-                    .title(getString(R.string.registro_tittle))
-                    .body(getString(R.string.your_new_account_have_been_created))
-                    .onPositive(getString(R.string.aceptar)) {
-                        findNavController().navigate(R.id.listTransactionFragment)
-                    }
+                if (name.isEmpty() || password.isEmpty()) {
+                    AwesomeDialog.build(requireActivity())
+                        .title(getString(R.string.error))
+                        .body(getString(R.string.enter_fields))
+                        .onPositive(getString(R.string.aceptar)) {
+
+                        }
+
+
+                } else {
+                    viewModel.saveUser(name, password)
+
+                    AwesomeDialog.build(requireActivity())
+                        .title(getString(R.string.registro_tittle))
+                        .body(getString(R.string.your_new_account_have_been_created))
+                        .onPositive(getString(R.string.aceptar)) {
+                            findNavController().navigate(R.id.listTransactionFragment)
+                        }
+                }
+
             }
 
         }
