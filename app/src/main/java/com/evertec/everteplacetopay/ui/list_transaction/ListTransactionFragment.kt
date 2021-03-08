@@ -93,6 +93,7 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
 
                     if (it.data.isEmpty()) {
                         binding.txtNoHaveTransaction.visibility = View.VISIBLE
+                        transactionsAdapter.setTransactionList(it.data)
                     } else {
                         binding.txtNoHaveTransaction.visibility = View.GONE
                         transactionsAdapter.setTransactionList(it.data)
