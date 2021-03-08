@@ -11,6 +11,7 @@ import com.evertec.everteplacetopay.Const
 import com.evertec.everteplacetopay.R
 import com.evertec.everteplacetopay.data.model.remote.ProcessTransactionInput
 import com.evertec.everteplacetopay.databinding.FragmentResumeTransactionBinding
+import com.evertec.everteplacetopay.getState
 
 
 class ResumeTransaction : Fragment() {
@@ -34,7 +35,7 @@ class ResumeTransaction : Fragment() {
     private fun setupUi() {
 
         binding.txtDate.text = transaction.date
-        binding.txtStatus.text = transaction.status.status
+        binding.txtStatus.text = getState(transaction.status.status)
         binding.txtAmountOriginal.text = transaction.amount.total.toString()
         binding.txtInterests.text = "0"
         binding.txtTotalPayed.text = transaction.amount.total.toString()

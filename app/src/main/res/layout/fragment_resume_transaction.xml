@@ -27,103 +27,284 @@
             android:text="@string/aprobada"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/txt_date"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/date"
+            android:layout_marginVertical="8dp"
+            android:orientation="horizontal">
 
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de transaccion: "
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txt_amount_original"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Monto original" />
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/txt_interests"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Interes" />
-
-
-        <TextView
-            android:id="@+id/txt_total_payed"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Total pagadol" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monto original: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_amount_original"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monto original"
+                android:textSize="16sp" />
 
 
-        <TextView
-            android:id="@+id/txt_value_fee"
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Valor cuota" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_type_credit"
+            <TextView
+                android:id="@+id/txt_interests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intereses: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="0" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Tipo de credito" />
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total pagado: "
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txt_months_date"
+            <TextView
+                android:id="@+id/txt_total_payed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Meses de plazo" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_cus"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor cuota: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_value_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Cus" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_receipt"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de credito: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_type_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin credito"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Recibo" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_bank"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meses de plazo: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_months_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Banco" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_ip_address"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cus: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_cus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10023"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Direccion Ip" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_status_sub"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recibo: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_receipt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Estado" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_response_code"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Banco: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="BLA" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Codigo de respuesta" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direccion Ip: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_ip_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120.01.21.1"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_status_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="Estado" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Codigo de respuesta: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_response_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="109343"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -133,7 +314,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Confirmar"
+        android:text="Volver a la lista"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

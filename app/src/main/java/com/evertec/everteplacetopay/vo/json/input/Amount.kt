@@ -9,6 +9,6 @@ import kotlinx.parcelize.RawValue
 data class Amount(
     val currency: String,
     val details: @RawValue List<Detail>,
-    val taxes: @RawValue List<Taxe>,
+    //val taxes: @RawValue List<Taxe>,
     val total: Int
 ) : Parcelable

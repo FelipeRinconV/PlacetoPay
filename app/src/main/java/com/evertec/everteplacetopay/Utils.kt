@@ -141,5 +141,20 @@ fun singUpUser(activity: Activity) {
 
 }
 
+fun getState(state: String): String {
+
+    return when (state) {
+
+        "APROVED" -> "APROVADA"
+
+        "REJECTED" -> "RECHAZADA"
+
+        "PENDING" -> "PENDIENTE"
+
+        else -> "DESCONOCIDO"
+    }
+
+}
+
 
 

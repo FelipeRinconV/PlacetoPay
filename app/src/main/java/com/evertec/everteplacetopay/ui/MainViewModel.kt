@@ -69,24 +69,24 @@ class MainViewModel @ViewModelInject constructor(
     ) {
 
         val auth = generateAuth()
-        val card = Card("122", "11", "21", "36545407030701")
+        val card = Card(ccv, monthExpired, yearExpired, numCard)
         val instrument = Instrument(card)
         val ipAddress = getLocalIpAddress(context).toString()
         val locale = "es_EC"
 
         //TODO pedir el tipo de documento
         val payer = Payer(
-            "1007376425",
+            numDocument,
             "CC",
-            "e.ingrv@gmail.com",
-            "3108457581",
-            "Luis felipe",
-            "Rincon villegas"
+            email,
+            numPhone,
+            name,
+            surName
         )
 
-        val amount = Amount("USD", 34.0)
-        val payment = Payment(amount, "description", "reference")
-        val userAgent = "kotlin " + System.getProperties().getProperty("kotlin.version")
+        val amount = Amount("COP", total.toDouble())
+        val payment = Payment(amount, description, reference)
+        val userAgent = "kotlin android"
 
         posJsonTransaction.value = ProcessTransactionOutput(
             auth,

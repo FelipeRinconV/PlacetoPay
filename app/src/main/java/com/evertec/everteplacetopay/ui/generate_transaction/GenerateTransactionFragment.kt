@@ -51,18 +51,18 @@ class GenerateTransactionFragment : Fragment() {
         binding.btnIrResume.setOnClickListener {
             viewModel.getNewPosJsonTransaction(
                 binding.txtNamePayer.text.toString(),
-                binding.txtSurname.toString(),
-                binding.txtNumDocument.toString(),
-                binding.txtEmail.toString(),
-                binding.txtNumPhone.toString(),
-                binding.txtNumCard.toString(),
-                binding.txtExpiredMonth.toString(),
-                binding.txtExpiredYear.toString(),
-                binding.txtCvv.toString(),
+                binding.txtSurname.text.toString(),
+                binding.txtNumDocument.text.toString(),
+                binding.txtEmail.text.toString(),
+                binding.txtNumPhone.text.toString(),
+                binding.txtNumCard.text.toString(),
+                binding.txtExpiredMonth.text.toString(),
+                binding.txtExpiredYear.text.toString(),
+                binding.txtCvv.text.toString(),
                 "COP",
-                binding.txtAmount.toString(),
-                binding.txtDescription.toString(),
-                binding.txtReference.toString(),
+                binding.txtAmount.text.toString(),
+                binding.txtDescription.text.toString(),
+                binding.txtReference.text.toString(),
                 requireContext()
             )
         }
@@ -108,6 +108,7 @@ class GenerateTransactionFragment : Fragment() {
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
                     //binding.json.text = it.exception.message.toString()
+                    showToast("${it.exception.message.toString()}", Toast.LENGTH_LONG)
                 }
             }
 

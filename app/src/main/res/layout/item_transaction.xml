@@ -9,9 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_update_transaction"
+        app:layout_constraintBottom_toTopOf="@+id/btn_delete_transaction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -125,9 +124,9 @@
 
 
             <TextView
-                android:text="Fecha de transaccion: "
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Fecha de transaccion: "
                 android:textSize="16sp" />
 
             <TextView

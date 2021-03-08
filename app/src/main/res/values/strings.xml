@@ -40,4 +40,8 @@
     <string name="Close">Cerrar</string>
     <string name="actualizar">Actualizar</string>
     <string name="borrar">Borrar</string>
+    <string name="generar_pago">Generar pago</string>
+    <string name="updated_transaction">Confirma actualizar la transaccion</string>
+    <string name="delete_transaction">Confirma borrar la transaccion</string>
+    <string name="confirm">Confirmar</string>
 </resources>

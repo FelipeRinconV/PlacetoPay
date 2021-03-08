@@ -86,9 +86,11 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
         viewModel.getListTransaction().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
-                    //  showToast("Cargando lista", Toast.LENGTH_LONG)
+
+                    binding.progressBar3.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
+                    binding.progressBar3.visibility = View.GONE
 
                     if (it.data.isEmpty()) {
                         binding.txtNoHaveTransaction.visibility = View.VISIBLE
@@ -99,6 +101,7 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
 
                 }
                 is Resource.Failure -> {
+                    binding.progressBar3.visibility = View.GONE
                     Log.e("ERROR_LISTA", it.exception.message)
                     showToast("Error ${it.exception.message}", Toast.LENGTH_LONG)
                 }
@@ -134,32 +137,52 @@ class ListTransactionFragment : Fragment(), TransactionAdapter.OnTransactionList
     }
 
     override fun onClickDeleteTransaction(transaction: TransactionEntity) {
-        viewModel.deleteTransaction(transaction)
+
+        AwesomeDialog.build(requireActivity())
+            .title(getString(R.string.alerta))
+            .body(getString(R.string.delete_transaction))
+            .onPositive(getString(R.string.confirm)) {
+                viewModel.deleteTransaction(transaction)
+            }.onNegative(getString(R.string.cancelar)) { }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClickUpdatedTransaction(transactionEntity: TransactionEntity) {
 
-        viewModel.getStateTransactionNow(viewModel.transactionEntityToGatewayQuery(transactionEntity))
-            .observe(
-                viewLifecycleOwner,
-                Observer {
-                    when (it) {
-                        is Resource.Loading -> {
-                            showToast("Actualizando item", Toast.LENGTH_LONG)
-                        }
-                        is Resource.Success -> {
-                            viewModel.updateTransaction(it.data, transactionEntity)
-                            showToast("Item actualizado", Toast.LENGTH_LONG)
-                        }
-                        is Resource.Failure -> {
-                            showToast(
-                                "Error actualizando item${it.exception.message}",
-                                Toast.LENGTH_LONG
-                            )
-                        }
-                    }
-                })
+
+        AwesomeDialog.build(requireActivity())
+            .title(getString(R.string.alerta))
+            .body(getString(R.string.updated_transaction))
+            .onPositive(getString(R.string.aceptar)) {
+
+                viewModel.getStateTransactionNow(
+                    viewModel.transactionEntityToGatewayQuery(
+                        transactionEntity
+                    )
+                )
+                    .observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            when (it) {
+                                is Resource.Loading -> {
+                                    showToast("Actualizando item", Toast.LENGTH_LONG)
+                                }
+                                is Resource.Success -> {
+                                    viewModel.updateTransaction(it.data, transactionEntity)
+                                    showToast("Item actualizado", Toast.LENGTH_LONG)
+                                }
+                                is Resource.Failure -> {
+                                    showToast(
+                                        "Error actualizando item${it.exception.message}",
+                                        Toast.LENGTH_LONG
+                                    )
+                                }
+                            }
+                        })
+
+
+            }
+            .onNegative(getString(R.string.cancelar)) { }
 
 
     }

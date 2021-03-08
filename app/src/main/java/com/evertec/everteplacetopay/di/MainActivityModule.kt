@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import javax.inject.Singleton
 
 
 @Module
@@ -16,10 +17,10 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 class MainActivityModule {
 
 
-
     @Provides
     fun mainViewModelsProvider(repository: Repository) =
         MainViewModel(repository)
 
-
+    @Provides
+    fun loginViewModelProvider(repository: Repository) = LoginViewModel(repository)
 }
