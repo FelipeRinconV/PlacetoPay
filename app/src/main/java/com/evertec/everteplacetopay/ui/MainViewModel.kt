@@ -1,13 +1,10 @@
 package com.evertec.everteplacetopay.ui
 
 import android.content.Context
-import android.net.wifi.WifiManager
 import android.os.Build
-import android.text.format.Formatter.formatIpAddress
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.evertec.everteplacetopay.data.model.TransactionEntity
 import com.evertec.everteplacetopay.data.repository.Repository
 import com.evertec.everteplacetopay.vo.Resource
 import com.evertec.everteplacetopay.vo.json.processTransaction.output.*
@@ -15,19 +12,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import com.evertec.everteplacetopay.*
-import com.evertec.everteplacetopay.data.model.ProcessTransactionInput
-import com.evertec.everteplacetopay.data.model.ProcessTransactionOutput
-import com.google.gson.Gson
-import okhttp3.OkHttpClient
-import java.util.*
+import com.evertec.everteplacetopay.data.DataController
+import com.evertec.everteplacetopay.data.model.*
+import com.evertec.everteplacetopay.data.model.remote.GateWayQuery
+import com.evertec.everteplacetopay.data.model.remote.GatewayQueryInput
+import com.evertec.everteplacetopay.data.model.remote.ProcessTransactionInput
+import com.evertec.everteplacetopay.data.model.remote.ProcessTransactionOutput
 
-class MainViewModel @ViewModelInject constructor(private val repository: Repository) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(
+    private val repository: Repository
+) : ViewModel() {
 
 
-    private val posJsonTransaction = MutableLiveData<String>()
+    private val posJsonTransaction = MutableLiveData<ProcessTransactionOutput>()
+
+    private val stringId = MutableLiveData<String>()
+
 
     //Result of the transaction
-    val currentTransaction = posJsonTransaction.switchMap {
+    fun generateTransaction() = posJsonTransaction.distinctUntilChanged().switchMap {
         liveData<Resource<ProcessTransactionInput>>(Dispatchers.IO) {
             emit(Resource.Loading())
             try {
@@ -38,9 +41,9 @@ class MainViewModel @ViewModelInject constructor(private val repository: Reposit
         }
     }
 
-
-    fun printText(): String {
-        return repository.printText()
+    fun removeObserverGenerateContract(lifecycleOwner: LifecycleOwner) {
+        posJsonTransaction.removeObservers(lifecycleOwner)
+        posJsonTransaction.value = null
     }
 
 
@@ -65,44 +68,36 @@ class MainViewModel @ViewModelInject constructor(private val repository: Reposit
         context: Context
     ) {
 
-        val login = "6dd490faf9cb87a9862245da41170ff2"
-        val passwordKey = "024h1IlD"
-        val nonce = getNonce()
-        val nonceBase64 = getNonceBase64(nonce)
-        val seedMethod = getSeed()
-        val trankey = getDigits(false, passwordKey, nonce, seedMethod)
-        val auth = Auth(login, trankey, nonceBase64, seedMethod)
-
-        val card = Card(ccv, monthExpired, yearExpired, "36545400000008")
+        val auth = generateAuth()
+        val card = Card("122", "11", "21", "36545407030701")
         val instrument = Instrument(card)
-
         val ipAddress = getLocalIpAddress(context).toString()
-        //Todo extraer locale
         val locale = "es_EC"
 
         //TODO pedir el tipo de documento
-        val payer = Payer(numDocument, "CC", email, numPhone, name, surName)
-        val amount = Amount(currency, 2000.000)
-        val payment = Payment(amount, description, reference)
+        val payer = Payer(
+            "1007376425",
+            "CC",
+            "e.ingrv@gmail.com",
+            "3108457581",
+            "Luis felipe",
+            "Rincon villegas"
+        )
 
+        val amount = Amount("USD", 34.0)
+        val payment = Payment(amount, "description", "reference")
         val userAgent = "kotlin " + System.getProperties().getProperty("kotlin.version")
 
-
-        val stringJson = Gson().toJson(
-            ProcessTransactionOutput(
-                auth,
-                instrument,
-                ipAddress,
-                locale,
-                payer,
-                payment,
-                userAgent
-            )
+        posJsonTransaction.value = ProcessTransactionOutput(
+            auth,
+            instrument,
+            ipAddress,
+            locale,
+            payer,
+            payment,
+            userAgent
         )
-        posJsonTransaction.value = stringJson
-
     }
-
 
     fun insertTransaction(transactionEntity: TransactionEntity) {
         viewModelScope.launch {
@@ -111,4 +106,71 @@ class MainViewModel @ViewModelInject constructor(private val repository: Reposit
     }
 
 
+    fun deleteTransaction(transactionEntity: TransactionEntity) {
+        viewModelScope.launch {
+            repository.deleteTransaction(transactionEntity)
+
+        }
+    }
+
+    fun getListTransaction() = liveData<Resource<List<TransactionEntity>>>(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emitSource(repository.getAllTransaction(DataController.id).map { Resource.Success(it) })
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
+
+    //Todo realizar el base 64 con otro metodo o realizarlo manual para no subir tanto la api
+    fun getStateTransactionNow(gateWayQuery: GateWayQuery) =
+        liveData<Resource<GatewayQueryInput>>(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try {
+                emit(repository.getStateTransaction(gateWayQuery))
+            } catch (ex: Exception) {
+                emit(Resource.Failure(ex))
+            }
+        }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun transactionEntityToGatewayQuery(transactionEntity: TransactionEntity): GateWayQuery {
+        return GateWayQuery("COP", generateAuth(), transactionEntity.internalReference)
+    }
+
+
+    fun getTransactionById() = stringId.distinctUntilChanged().switchMap { id ->
+        liveData<Resource<TransactionEntity>>(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try {
+                emitSource(repository.getTransactionById(id).map { Resource.Success(it) })
+            } catch (e: Exception) {
+                emit(Resource.Failure(e))
+            }
+        }
+    }
+
+
+    fun searchTransaction(id: String) {
+        stringId.value = id
+    }
+
+    fun updateTransaction(data: GatewayQueryInput, transactionEntity: TransactionEntity) {
+
+        //TODO add more data in the change
+        transactionEntity.state = data.status.status
+
+        viewModelScope.launch {
+            repository.insertTransaction(transactionEntity)
+        }
+
+    }
+
 }
+
+
+
+
+
+

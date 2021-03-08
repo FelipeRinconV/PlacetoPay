@@ -1,4 +1,4 @@
-package com.evertec.everteplacetopay.data.model
+package com.evertec.everteplacetopay.data.model.remote
 
 import com.evertec.everteplacetopay.vo.json.input.*
 

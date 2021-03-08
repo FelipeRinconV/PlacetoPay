@@ -1,4 +1,4 @@
-package com.evertec.everteplacetopay.data.model
+package com.evertec.everteplacetopay.data.model.remote
 
 import android.os.Parcelable
 import com.evertec.everteplacetopay.vo.json.input.*
@@ -18,7 +18,7 @@ data class ProcessTransactionInput(
     val discount: @RawValue Any,
     val franchise: String,
     val franchiseName: String,
-    val internalReference: Int,
+    val internalReference: Long,
     val issuerName: String,
     val lastDigits: String,
     val paymentMethod: String,

@@ -1,4 +1,4 @@
-package com.evertec.everteplacetopay.di.module
+package com.evertec.everteplacetopay.di
 
 import com.evertec.everteplacetopay.data.repository.RepoImplementation
 import com.evertec.everteplacetopay.data.repository.Repository

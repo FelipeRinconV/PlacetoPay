@@ -1,4 +1,4 @@
-package com.evertec.everteplacetopay.data.model
+package com.evertec.everteplacetopay.data.model.remote
 
 import com.evertec.everteplacetopay.vo.json.output.Auth
 
@@ -9,5 +9,5 @@ import com.evertec.everteplacetopay.vo.json.output.Auth
 data class GateWayQuery(
     val locale: String,
     val auth: Auth,
-    val internalReference: Int
+    val internalReference: Long
 )

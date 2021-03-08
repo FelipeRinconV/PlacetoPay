@@ -8,7 +8,7 @@ import com.evertec.everteplacetopay.base.BaseViewHolder
 import com.evertec.everteplacetopay.data.model.TransactionEntity
 import com.evertec.everteplacetopay.databinding.ItemTransactionBinding
 
-class TransactionAdapter2(
+class TransactionAdapter(
     private val context: Context,
     private val onClickRowListener: OnTransactionListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -57,7 +57,7 @@ class TransactionAdapter2(
         override fun bind(item: TransactionEntity) = with(binding) {
             txtState.text = item.state
             txtCardNumber.text = item.cardNumber
-            txtDate.text = item.date
+            txtDate.text = item.date.subSequence(0, 10)
             txtInternalReference.text = item.internalReference.toString()
             txtValue.text = item.value.toString()
 

@@ -1,9 +1,12 @@
 package com.evertec.everteplacetopay.vo.json.input
 
-import com.evertec.everteplacetopay.vo.json.processTransaction.input.From
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class Conversion(
     val factor: Int,
-    val from: From,
-    val to: To
-)
+    val from: @RawValue From,
+    val to:@RawValue To
+) : Parcelable

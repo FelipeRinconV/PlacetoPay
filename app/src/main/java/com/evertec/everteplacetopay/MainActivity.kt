@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         navController = findNavController(R.id.nav_host_fragment)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+     
     }
 
     override fun onNavigateUp(): Boolean {

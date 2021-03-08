@@ -15,4 +15,29 @@
     <string name="value">Valor a pagar</string>
     <string name="surname">Apellido</string>
     <string name="document">Numero de documento</string>
+    <string name="aprobada">APROBADA</string>
+    <string name="date">Date</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="alerta">Alerta</string>
+    <string name="cerrar_sesion_confirm">¿ Esta de seguro de cerrar la sesion ?</string>
+    <string name="cerrar_sesion_accept">Cerrar sesion</string>
+    <string name="nuevo_usuario">Nuevo usuario</string>
+    <string name="por_favor_registrese_primer">Por favor registrese primero para poder iniciar sesion</string>
+    <string name="error">error</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="ocurrio_un_error_login">Ocurrio un error durante el incio de sesion, por favor intente de nuevo.</string>
+    <string name="registro_tittle">Registro</string>
+    <string name="your_new_account_have_been_created">Tu nueva cuenta ha sido creada</string>
+    <string name="Close">Cerrar</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="borrar">Borrar</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.evertec.everteplacetopay.ui.generate_transaction
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,21 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.evertec.everteplacetopay.Const
 import com.evertec.everteplacetopay.R
+import com.evertec.everteplacetopay.data.DataController
+import com.evertec.everteplacetopay.data.model.TransactionEntity
 import com.evertec.everteplacetopay.databinding.FragmentGenerateTransactionBinding
+import com.evertec.everteplacetopay.showToast
 import com.evertec.everteplacetopay.ui.MainViewModel
+import com.evertec.everteplacetopay.ui.login.viewmodel.LoginViewModel
 import com.evertec.everteplacetopay.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ActivityContext
-import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GenerateTransactionFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentGenerateTransactionBinding? = null
 
 
@@ -31,7 +36,7 @@ class GenerateTransactionFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    //TODO hacer el procceso de base 64 manual para no tener que requerir andorid 0
+    //TODO hacer el procceso de base 64 manual para no tener que requerir android 0
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,22 +66,48 @@ class GenerateTransactionFragment : Fragment() {
                 requireContext()
             )
         }
+
+
     }
 
+    //TODO este obsver debe cambiarse ya que se mantiene activo despues del primer
     private fun setupObservers() {
-
-        viewModel.currentTransaction.observe(viewLifecycleOwner, Observer {
+        viewModel.generateTransaction().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     binding.json.text = it.data.toString()
+
+                    //TODO pasar el user creator
+                    val newTransaction = TransactionEntity(
+                        it.data.internalReference,
+                        DataController.getUserId(),
+                        it.data.reference,
+                        it.data.lastDigits,
+                        it.data.status.status,
+                        it.data.amount.total.toDouble(),
+                        it.data.status.date
+                    )
+
+
+                    if (newTransaction != null) {
+                        viewModel.insertTransaction(newTransaction)
+                        val bundle = Bundle()
+                        bundle.putParcelable(Const.ITEM_TRANSACTION.name, it.data)
+                        viewModel.removeObserverGenerateContract(this)
+                        findNavController().navigate(R.id.resumeTransaction, bundle)
+                    } else {
+                        showToast("La transsaccion generada es nula", Toast.LENGTH_LONG)
+                    }
+
+
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
-                    it.exception.printStackTrace()
-                    binding.json.text = it.exception.message.toString()
+                    //binding.json.text = it.exception.message.toString()
                 }
             }
 
@@ -84,6 +115,7 @@ class GenerateTransactionFragment : Fragment() {
 
 
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,5 +130,6 @@ class GenerateTransactionFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+
     }
 }
